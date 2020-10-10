@@ -18,7 +18,7 @@ class File():
 		with open(self.path_to_file, 'w') as file:
 			file.write(string_to_write)
 
-	def writeline(self, string_to_write):
+	def write_next_line(self, string_to_write):
 		with open(self.path_to_file, 'a') as file:
 			file.write(string_to_write)
 
@@ -33,7 +33,7 @@ class File():
 			new_file = File(temp.name)
 
 			for content in files_content:
-				new_file.writeline(content)
+				new_file.write_next_line(content)
 
 		return new_file 
 
