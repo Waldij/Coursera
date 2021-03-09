@@ -23,8 +23,8 @@ class Client():
         """
         get_command = 'get ' + key + '\n'
         response = self.send_command(get_command)
-        self.check_response(response)
-        return self.get_response_processing(response)
+        self._check_response(response)
+        return self._get_response_processing(response)
 
     def put(self, key, value, timestamp=None):
         """
@@ -32,7 +32,7 @@ class Client():
             put <key> <value> <timestamp or time>\n
         """
         put_command = 'put ' + key + ' ' + str(value) + ' ' + str(timestamp if timestamp else int(time.time())) + '\n'
-        self.check_response(self.send_command(put_command))
+        self._check_response(self.send_command(put_command))
 
     def send_command(self, command):
         """
@@ -47,7 +47,7 @@ class Client():
         except:
             raise ClientError
 
-    def check_response(self, response):
+    def _check_response(self, response):
         """
             Checks response from server to be
             'ok\n'
@@ -57,7 +57,7 @@ class Client():
         if response[0:3] != 'ok\n':
             raise ClientError(response)
 
-    def get_response_processing(self, response):
+    def _get_response_processing(self, response):
         """
             Processes the server response to get command, that returns dict
             :arg response [(timestamp1, metric_value1), (timestamp2, metric_value2), …]
